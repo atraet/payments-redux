@@ -34,7 +34,7 @@ export function selectPeriod(periodType) {
     }
 }
 
-export function fetchInvoices(){
+export function fetchInvoices(paymentId, periodType){
     let request = axios.get('http://localhost:5050/invoices');
 
     return{

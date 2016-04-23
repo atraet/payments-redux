@@ -9,7 +9,7 @@ class Invoices extends React.Component {
             </ul>
         </div>)
     }
-    
+
     renderInvoice(invoice) {
         return (
             <li key={invoice.id}>{invoice.name}</li>

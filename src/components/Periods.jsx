@@ -25,16 +25,22 @@ class Periods extends React.Component {
         );
     }
 
-    selectPeriod(period){
+    selectPeriod(period) {
         this.props.selectPeriod(period.type);
-        this.props.fetchInvoices();
+
+        let selectedPayment = this.props.selectedPayment;
+
+        if (selectedPayment) {
+            this.props.fetchInvoices(selectedPayment, period.type);
+        }
     }
 }
 
 function mapStateToProps(state) {
     return {
         periods: state.periods,
-        selectedPeriod: state.selectedPeriod
+        selectedPeriod: state.selectedPeriod,
+        selectedPayment: state.selectedPayment
     };
 }
 

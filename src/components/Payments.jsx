@@ -19,10 +19,20 @@ class Payments extends React.Component {
     renderPayment(payment) {
         return (
             <li key={payment.id}
-                onClick={()=>{ this.props.selectPayment(payment.id)}}>
+                onClick={()=>{ this.selectPayment(payment)}}>
                 {payment.id}
             </li>
         )
+    }
+
+    selectPayment(payment) {
+        this.props.selectPayment(payment.id)
+
+        let selectedPeriod = this.props.selectedPeriod;
+
+        if (selectedPeriod) {
+            this.props.fetchInvoices(payment.id, selectedPeriod);
+        }
     }
 }
 
@@ -30,7 +40,8 @@ class Payments extends React.Component {
 function mapStateToProps(state) {
     return {
         payments: state.payments || [],
-        selectedPayment: state.selectedPayment
+        selectedPayment: state.selectedPayment,
+        selectedPeriod: state.selectedPeriod
     };
 }
 
