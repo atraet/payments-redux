@@ -3,20 +3,29 @@ import {connect} from 'react-redux';
 import * as actions from '../actions';
 
 class Payments extends React.Component {
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         this.props.fetchPayments();
     }
 
     render() {
-        return (<div>
-            Payments placeholder xxx
-            <ul>{this.props.payments.map(this.renderPayment)}</ul>
-        </div>)
+        let onClick = this.props.selectPayment.bind(this, {});
+        console.log('onclick', onClick);
+        return (
+            <div>
+                Payments placeholder xxx
+                <div>selected payment: {this.props.selectedPayment}</div>
+                <ul>{this.props.payments.map(this.renderPayment)}</ul>
+            </div>)
     }
 
     renderPayment(payment) {
+
         return (
-            <li key={payment.id}>{payment.id}</li>
+            <li key={payment.id}
+                onClick={()=>{}}>
+                {payment.id}
+            </li>
         )
     }
 }
@@ -27,4 +36,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, actions)(Payments)
+export default connect(mapStateToProps, actions)(Payments);
