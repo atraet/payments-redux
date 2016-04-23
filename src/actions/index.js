@@ -33,3 +33,12 @@ export function selectPeriod(periodType) {
         payload: periodType
     }
 }
+
+export function fetchInvoices(){
+    let request = axios.get('http://localhost:5050/invoices');
+
+    return{
+        type: actionTypes.FETCH_INVOICES,
+        payload: request
+    }
+}

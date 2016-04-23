@@ -4,12 +4,14 @@ import * as actions from '../actions/types';
 
 import paymentsReducer from './payments';
 import selectedPaymentReducer from './selectedPayment';
+import invoicesReducer from './invoices';
 
 const rootReducer = combineReducers({
     payments: paymentsReducer,
     selectedPayment: selectedPaymentReducer,
     periods: periodsReducer,
-    selectedPeriod: selectedPeriodReducer
+    selectedPeriod: selectedPeriodReducer,
+    invoices: invoicesReducer
 });
 
 export default rootReducer;

@@ -47,5 +47,23 @@
       "type": 4,
       "description": "Bestedingen 2015"
     }
+  ],
+  "invoices": [
+    {
+      "id": 11111,
+      "name": "Besteding 1"
+    },
+    {
+      "id": 22222,
+      "name": "Besteding 2"
+    },
+    {
+      "id": 33333,
+      "name": "Besteding 3"
+    },
+    {
+      "id": 44444,
+      "name": "Besteding 4"
+    }
   ]
 }

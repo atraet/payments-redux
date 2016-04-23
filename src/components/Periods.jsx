@@ -19,10 +19,15 @@ class Periods extends React.Component {
 
     renderPeriod(period) {
         return (
-            <div key={period.type} onClick={() => this.props.selectPeriod(period.type)}>
+            <div key={period.type} onClick={() => this.selectPeriod(period)}>
                 <button>{period.description}</button>
             </div>
         );
+    }
+
+    selectPeriod(period){
+        this.props.selectPeriod(period.type);
+        this.props.fetchInvoices();
     }
 }
 
