@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import paymentsReducer from './payments';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  payments: paymentsReducer
 });
 
 export default rootReducer;

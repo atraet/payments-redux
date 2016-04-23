@@ -2,17 +2,28 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 
-class Payments extends React.Component{
-    render(){
-        return(<div>
-            Payments placeholder
+class Payments extends React.Component {
+    componentWillMount() {
+        this.props.fetchPayments();
+    }
+
+    render() {
+        return (<div>
+            Payments placeholder xxx
+            <ul>{this.props.payments.map(this.renderPayment)}</ul>
         </div>)
+    }
+
+    renderPayment(payment) {
+        return (
+            <li key={payment.id}>{payment.id}</li>
+        )
     }
 }
 
-function mapStateToProps(){
+function mapStateToProps(state) {
     return {
-        payments: []
+        payments: state.payments || []
     };
 }
 
