@@ -12,7 +12,6 @@ export function fetchPayments() {
 }
 
 export function selectPayment(payment) {
-    console.log(`select payment action: payment: ${payment}`)
     return {
         type: actionTypes.SELECT_PAYMENT,
         payload: payment

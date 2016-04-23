@@ -9,30 +9,32 @@ class Payments extends React.Component {
     }
 
     render() {
-        let onClick = this.props.selectPayment.bind(this, {});
-        console.log('onclick', onClick);
         return (
             <div>
-                Payments placeholder xxx
                 <div>selected payment: {this.props.selectedPayment}</div>
-                <ul>{this.props.payments.map(this.renderPayment)}</ul>
+                <ul>{this.props.payments.map(payment =>this.renderPayment(payment))}</ul>
             </div>)
     }
 
     renderPayment(payment) {
-
         return (
             <li key={payment.id}
-                onClick={()=>{}}>
+                onClick={()=>{this.selectPayment(payment)}}>
                 {payment.id}
             </li>
         )
     }
+
+    selectPayment(payment) {
+        this.props.selectPayment(payment.id);
+    }
 }
+
 
 function mapStateToProps(state) {
     return {
-        payments: state.payments || []
+        payments: state.payments || [],
+        selectedPayment: state.selectedPayment
     };
 }
 
