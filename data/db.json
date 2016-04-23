@@ -29,5 +29,23 @@
       "id": "WWM6VKFQ",
       "billingName": "W. M. van Veen"
     }
+  ],
+  "periods": [
+    {
+      "type": 1,
+      "description": "Bestedingen april 2016"
+    },
+    {
+      "type": 2,
+      "description": "Bestedingen mei 2016"
+    },
+    {
+      "type": 3,
+      "description": "Bestedingen jan t/m mrt 2016"
+    },
+    {
+      "type": 4,
+      "description": "Bestedingen 2015"
+    }
   ]
 }

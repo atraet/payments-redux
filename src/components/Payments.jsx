@@ -12,21 +12,17 @@ class Payments extends React.Component {
         return (
             <div>
                 <div>selected payment: {this.props.selectedPayment}</div>
-                <ul>{this.props.payments.map(payment =>this.renderPayment(payment))}</ul>
+                <ul>{this.props.payments.map(payment => this.renderPayment(payment))}</ul>
             </div>)
     }
 
     renderPayment(payment) {
         return (
             <li key={payment.id}
-                onClick={()=>{this.selectPayment(payment)}}>
+                onClick={()=>{ this.props.selectPayment(payment.id)}}>
                 {payment.id}
             </li>
         )
-    }
-
-    selectPayment(payment) {
-        this.props.selectPayment(payment.id);
     }
 }
 

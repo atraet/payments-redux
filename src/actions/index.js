@@ -11,9 +11,25 @@ export function fetchPayments() {
     }
 }
 
-export function selectPayment(payment) {
+export function selectPayment(paymentId) {
     return {
         type: actionTypes.SELECT_PAYMENT,
-        payload: payment
+        payload: paymentId
     };
+}
+
+export function fetchPeriods() {
+    let request = axios.get('http://localhost:5050/periods');
+
+    return {
+        type: actionTypes.FETCH_PERIODS,
+        payload: request
+    }
+}
+
+export function selectPeriod(periodType) {
+    return {
+        type: actionTypes.SELECT_PERIOD,
+        payload: periodType
+    }
 }
