@@ -10,7 +10,7 @@ class Payments extends React.Component {
         // Todo: remove setTimeout
         this.props.turnOnPaymentLoader();
 
-        setTimeout(() =>{
+        setTimeout(() => {
             this.props.fetchPayments();
             this.props.turnOffPaymentLoader();
         }, 3000);
@@ -18,33 +18,39 @@ class Payments extends React.Component {
 
     render() {
 
-        if(this.props.isLoadingPayments){
+        if (this.props.isLoadingPayments) {
             console.log(`Payments.render.isLoadingPayments: ${this.props.isLoadingPayments}`);
             return <Loader />;
         }
 
-        if(!this.props.payments.length){
+        if (!this.props.payments.length) {
             return this.renderWhenNoPayments();
         }
 
         return (
-            <div>
-                <div>selected payment: {this.props.selectedPayment}</div>
-                <ul>{this.props.payments.map(payment => this.renderPayment(payment))}</ul>
+            <div className="panel panel-info">
+                <div className="panel-heading">
+                    <h3 className="panel-title">Payments</h3>
+                </div>
+                <div className="panel-body">
+                    <ul className="list-group">{this.props.payments.map(payment => this.renderPayment(payment))}</ul>
+                </div>
+                <div className="panel-footer"> Selected payment: {this.props.selectedPayment}</div>
             </div>)
     }
 
     renderPayment(payment) {
         return (
             <li key={payment.id}
-                onClick={()=>{ this.selectPayment(payment)}}>
+                onClick={()=>{ this.selectPayment(payment)}}
+                className="list-group-item">
                 {payment.id}
             </li>
         )
     }
 
-    renderWhenNoPayments(){
-        return(<div>You do not have payments yet.</div>);
+    renderWhenNoPayments() {
+        return (<div>You do not have payments yet.</div>);
     }
 
     selectPayment(payment) {

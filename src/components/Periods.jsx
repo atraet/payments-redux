@@ -18,18 +18,28 @@ class Periods extends React.Component {
         }
 
         return (
-            <div>
-                <div>Selected period: {this.props.selectedPeriod}</div>
-                {this.props.periods.map(period => this.renderPeriod(period))}
+            <div className="panel panel-info">
+                <div className="panel-heading">
+                    <h3 className="panel-title">Periods</h3>
+                </div>
+                <div className="panel-body">
+                    <div className="card-list">
+                        {this.props.periods.map(period => this.renderPeriod(period))}
+                    </div>
+                </div>
+                <div className="panel-footer">Selected period: {this.props.selectedPeriod}</div>
             </div>
         );
     }
 
     renderPeriod(period) {
         return (
-            <div key={period.type} onClick={() => this.selectPeriod(period)}>
-                <button>{period.description}</button>
+            <div key={period.type}
+                 onClick={() => this.selectPeriod(period)}
+                 className="card card-block">
+                <h5 className="card-title">{period.description}</h5>
             </div>
+
         );
     }
 

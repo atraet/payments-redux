@@ -3,16 +3,28 @@ import {connect} from 'react-redux';
 
 class Invoices extends React.Component {
     render() {
-        return (<div>
-            <ul>
-                {this.props.invoices.map(this.renderInvoice)}
-            </ul>
-        </div>)
+        if(!this.props.invoices.length){
+            return null;
+        }
+
+        return (
+            <div className="panel panel-info">
+                <div className="panel-heading">
+                    <h3 className="panel-title">Invoices</h3>
+                </div>
+                <div className="panel-body">
+                    <ul className="list-group"> {this.props.invoices.map(this.renderInvoice)}</ul>
+                </div>
+                <div className="panel-footer"> Selected payment: {this.props.selectedPayment}</div>
+            </div>
+        )
     }
 
     renderInvoice(invoice) {
         return (
-            <li key={invoice.id}>{invoice.name}</li>
+            <li key={invoice.id} className="list-group-item">
+                {invoice.name}
+            </li>
         )
     }
 }

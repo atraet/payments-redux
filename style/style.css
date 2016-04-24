@@ -1,0 +1,15 @@
+.card-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 30%;
+    min-width: 300px;
+}
+
+.card.active{
+    background-color: #445588;
+    color: #fff;
+}
