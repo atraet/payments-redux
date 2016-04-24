@@ -13,7 +13,7 @@ class Payments extends React.Component {
         setTimeout(() => {
             this.props.fetchPayments();
             this.props.turnOffPaymentLoader();
-        }, 3000);
+        }, 1000);
     }
 
     render() {
@@ -33,19 +33,31 @@ class Payments extends React.Component {
                     <h3 className="panel-title">Payments</h3>
                 </div>
                 <div className="panel-body">
-                    <ul className="list-group">{this.props.payments.map(payment => this.renderPayment(payment))}</ul>
+                    <table className="table  table-hover">
+                        <tbody>
+                            {this.props.payments.map(payment => this.renderPayment(payment))}
+                        </tbody>
+                    </table>
                 </div>
                 <div className="panel-footer"> Selected payment: {this.props.selectedPayment}</div>
             </div>)
     }
 
     renderPayment(payment) {
+        let active = payment.id === this.props.selectedPayment
+            ? 'success'
+            : '';
+
         return (
-            <li key={payment.id}
+            <tr key={payment.id}
                 onClick={()=>{ this.selectPayment(payment)}}
-                className="list-group-item">
-                {payment.id}
-            </li>
+                className={active}>
+                <td>{payment.billingName}</td>
+                <td>{payment.accountNumber}</td>
+                <td>{payment.type}</td>
+                <td>{payment.id}</td>
+            </tr>
+
         )
     }
 

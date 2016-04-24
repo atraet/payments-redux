@@ -27,16 +27,22 @@ class Periods extends React.Component {
                         {this.props.periods.map(period => this.renderPeriod(period))}
                     </div>
                 </div>
-                <div className="panel-footer">Selected period: {this.props.selectedPeriod}</div>
+                <div className="panel-footer">
+                    Selected period: {this.props.selectedPeriod}
+                </div>
             </div>
         );
     }
 
     renderPeriod(period) {
+        let cssClass = period.type === this.props.selectedPeriod
+            ? 'card card-block active'
+            : 'card card-block' ;
+
         return (
             <div key={period.type}
                  onClick={() => this.selectPeriod(period)}
-                 className="card card-block">
+                 className={cssClass}>
                 <h5 className="card-title">{period.description}</h5>
             </div>
 
