@@ -20,16 +20,19 @@ class App extends Component {
     }
 
     renderInstruction() {
-        if (this.props.selectedPayment && this.props.selectedPeriod) {
-            return (<div></div>);
+        if (this.props.payments.length &&
+            (!this.props.selectedPayment || !this.props.selectedPeriod)) {
+
+            return (<div>Please select a payment and a period to view the invoices.</div>)
         }
 
-        return (<div>Please select a payment and a period to view the invoices.</div>)
+        return null;
     }
 }
 
 function mapStateToProps(state) {
     return {
+        payments: state.payments,
         selectedPayment: state.selectedPayment,
         selectedPeriod: state.selectedPeriod
     }

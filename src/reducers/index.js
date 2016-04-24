@@ -1,13 +1,15 @@
 import {combineReducers} from 'redux';
 
-import * as actions from '../actions/types';
-
 import paymentsReducer from './payments';
 import selectedPaymentReducer from './selectedPayment';
+import isLoadingPaymentsReducer from './isLoadingPayments';
+import periodsReducer from './periods';
+import selectedPeriodReducer from './selectedPeriod';
 import invoicesReducer from './invoices';
 
 const rootReducer = combineReducers({
     payments: paymentsReducer,
+    isLoadingPayments: isLoadingPaymentsReducer,
     selectedPayment: selectedPaymentReducer,
     periods: periodsReducer,
     selectedPeriod: selectedPeriodReducer,
@@ -15,22 +17,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-
-function periodsReducer(state = [], action) {
-    switch (action.type) {
-        case actions.FETCH_PERIODS:
-            return [...state, ...action.payload.data];
-        default:
-            return state;
-    }
-}
-
-function selectedPeriodReducer(state = null, action) {
-    switch (action.type) {
-        case actions.SELECT_PERIOD:
-            return action.payload;
-        default:
-            return state;
-    }
-}

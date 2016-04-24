@@ -1,14 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import loadPeriod from './hoc/loadPeriod';
 
 class Periods extends React.Component {
     constructor(props) {
         super(props);
+
         this.props.fetchPeriods();
     }
 
     render() {
+
+        // Do not render when payments is loading, OR there is no payments
+        if (this.props.isLoadingPayments || !this.props.payments.length) {
+            return null;
+        }
+
         return (
             <div>
                 <div>Selected period: {this.props.selectedPeriod}</div>
@@ -40,8 +48,10 @@ function mapStateToProps(state) {
     return {
         periods: state.periods,
         selectedPeriod: state.selectedPeriod,
+        payments: state.payments,
+        isLoadingPayments: state.isLoadingPayments,
         selectedPayment: state.selectedPayment
     };
 }
 
-export default connect(mapStateToProps, actions)(Periods)
+export default connect(mapStateToProps, actions)(Periods);

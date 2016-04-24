@@ -2,12 +2,25 @@ import * as actionTypes from './types';
 import axios from 'axios';
 
 export function fetchPayments() {
-
-    let request = axios.get('http://localhost:5050/payments');
+    let request = request = axios.get('http://localhost:5050/payments');
 
     return {
         type: actionTypes.FETCH_PAYMENTS,
         payload: request
+    }
+}
+
+export function turnOnPaymentLoader() {
+    return {
+        type: actionTypes.LOADING_PAYMENTS,
+        payload: true
+    }
+}
+
+export function turnOffPaymentLoader() {
+    return {
+        type: actionTypes.LOADING_PAYMENTS,
+        payload: false
     }
 }
 
@@ -34,10 +47,10 @@ export function selectPeriod(periodType) {
     }
 }
 
-export function fetchInvoices(paymentId, periodType){
+export function fetchInvoices(paymentId, periodType) {
     let request = axios.get('http://localhost:5050/invoices');
 
-    return{
+    return {
         type: actionTypes.FETCH_INVOICES,
         payload: request
     }

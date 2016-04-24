@@ -1,14 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import Loader from './Loader.jsx';
 
 class Payments extends React.Component {
     constructor(props) {
         super(props);
-        this.props.fetchPayments();
+
+        // Todo: remove setTimeout
+        this.props.turnOnPaymentLoader();
+
+        setTimeout(() =>{
+            this.props.fetchPayments();
+            this.props.turnOffPaymentLoader();
+        }, 3000);
     }
 
     render() {
+
+        if(this.props.isLoadingPayments){
+            console.log(`Payments.render.isLoadingPayments: ${this.props.isLoadingPayments}`);
+            return <Loader />;
+        }
+
+        if(!this.props.payments.length){
+            return this.renderWhenNoPayments();
+        }
+
         return (
             <div>
                 <div>selected payment: {this.props.selectedPayment}</div>
@@ -25,8 +43,12 @@ class Payments extends React.Component {
         )
     }
 
+    renderWhenNoPayments(){
+        return(<div>You do not have payments yet.</div>);
+    }
+
     selectPayment(payment) {
-        this.props.selectPayment(payment.id)
+        this.props.selectPayment(payment.id);
 
         let selectedPeriod = this.props.selectedPeriod;
 
@@ -40,6 +62,7 @@ class Payments extends React.Component {
 function mapStateToProps(state) {
     return {
         payments: state.payments || [],
+        isLoadingPayments: state.isLoadingPayments,
         selectedPayment: state.selectedPayment,
         selectedPeriod: state.selectedPeriod
     };
