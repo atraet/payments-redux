@@ -12,14 +12,14 @@ export function fetchPayments() {
 
 export function turnOnPaymentLoader() {
     return {
-        type: actionTypes.LOADING_PAYMENTS,
+        type: actionTypes.SWITCH_PAYMENTS_LOADER,
         payload: true
     }
 }
 
 export function turnOffPaymentLoader() {
     return {
-        type: actionTypes.LOADING_PAYMENTS,
+        type: actionTypes.SWITCH_PAYMENTS_LOADER,
         payload: false
     }
 }

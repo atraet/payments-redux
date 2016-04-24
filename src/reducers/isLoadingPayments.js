@@ -1,8 +1,8 @@
-import {LOADING_PAYMENTS} from '../actions/types';
+import {SWITCH_PAYMENTS_LOADER} from '../actions/types';
 
 export default function (state = false, action) {
     switch (action.type) {
-        case LOADING_PAYMENTS:
+        case SWITCH_PAYMENTS_LOADER:
             console.log(`loadingPayments reducer: ${action.payload}`);
             return action.payload;
         default:
