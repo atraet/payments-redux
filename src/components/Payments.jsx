@@ -6,20 +6,11 @@ import Loader from './Loader.jsx';
 class Payments extends React.Component {
     constructor(props) {
         super(props);
-
-        // Todo: remove setTimeout
-        this.props.turnOnPaymentLoader();
-
-        setTimeout(() => {
-            this.props.fetchPayments();
-            this.props.turnOffPaymentLoader();
-        }, 1000);
     }
 
     render() {
 
         if (this.props.isLoadingPayments) {
-            console.log(`Payments.render.isLoadingPayments: ${this.props.isLoadingPayments}`);
             return <Loader />;
         }
 

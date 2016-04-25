@@ -2,11 +2,24 @@ import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
 
+import * as actions from '../actions/index';
+
 import Payments from './Payments.jsx';
 import Periods from './Periods.jsx';
 import Invoices from './Invoices.jsx';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        // Todo: remove setTimeout
+        this.props.turnOnPaymentLoader();
+
+        setTimeout(() => {
+            this.props.fetchPayments();
+            this.props.turnOffPaymentLoader();
+        }, 1000);
+    }
+        
     render() {
         return (
             <div>
@@ -38,4 +51,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, actions)(App);

@@ -48,10 +48,12 @@ export function selectPeriod(periodType) {
 }
 
 export function fetchInvoices(paymentId, periodType) {
-    let request = axios.get('http://localhost:5050/invoices');
+    let payload = paymentId && periodType
+        ? axios.get('http://localhost:5050/invoices')
+        : [];
 
     return {
         type: actionTypes.FETCH_INVOICES,
-        payload: request
+        payload: payload
     }
 }
