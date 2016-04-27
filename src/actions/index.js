@@ -1,12 +1,10 @@
 import * as actionTypes from './types';
-import axios from 'axios';
+import * as dataService from '../dataSerivice';
 
 export function fetchPayments() {
-    let request = request = axios.get('http://localhost:5050/payments');
-
     return {
         type: actionTypes.FETCH_PAYMENTS,
-        payload: request
+        payload: dataService.fetchPayments()
     }
 }
 
@@ -32,11 +30,9 @@ export function selectPayment(paymentId) {
 }
 
 export function fetchPeriods() {
-    let request = axios.get('http://localhost:5050/periods');
-
     return {
         type: actionTypes.FETCH_PERIODS,
-        payload: request
+        payload: dataService.fetchPeriods()
     }
 }
 
@@ -48,12 +44,8 @@ export function selectPeriod(periodType) {
 }
 
 export function fetchInvoices(paymentId, periodType) {
-    let payload = paymentId && periodType
-        ? axios.get('http://localhost:5050/invoices')
-        : [];
-
     return {
         type: actionTypes.FETCH_INVOICES,
-        payload: payload
+        payload: dataService.fetchInvoices(paymentId, periodType)
     }
 }
