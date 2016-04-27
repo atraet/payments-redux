@@ -1,5 +1,5 @@
 import * as actionTypes from './types';
-import * as dataService from '../dataSerivice';
+import * as dataService from '../dataService';
 
 export function fetchPayments() {
     return {
