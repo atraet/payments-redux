@@ -2,6 +2,8 @@ import React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
 
+import Rx from 'rxjs/Rx';
+
 import * as actions from '../actions/index';
 
 import Payments from './Payments.jsx';
@@ -11,15 +13,26 @@ import Invoices from './Invoices.jsx';
 class App extends Component {
     constructor(props) {
         super(props);
-        // Todo: remove setTimeout
+
         this.props.turnOnPaymentLoader();
 
-        setTimeout(() => {
+        // Todo: remove setTimeout
+        const timer$ = Rx.Observable.timer(1000);
+
+        timer$.subscribe(() => {
             this.props.fetchPayments();
             this.props.turnOffPaymentLoader();
-        }, 1000);
+        });
     }
-        
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.payments.length === 1
+            && this.props.selectedPayment != nextProps.selectedPayment
+            && this.props.selectedPeriod != nextProps.selectedPeriod) {
+            nextProps.fetchInvoices(nextProps.selectedPayment, nextProps.selectedPeriod);
+        }
+    }
+
     render() {
         return (
             <div>
