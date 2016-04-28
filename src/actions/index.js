@@ -1,51 +1,87 @@
-import * as actionTypes from './types';
+import * as actions from './types';
 import * as dataService from '../dataService';
 
 export function fetchPayments() {
-    return {
-        type: actionTypes.FETCH_PAYMENTS,
-        payload: dataService.fetchPayments()
-    }
-}
+    return dispatch => {
+        requestPayment();
 
-export function turnOnPaymentLoader() {
-    return {
-        type: actionTypes.SWITCH_PAYMENTS_LOADER,
-        payload: true
-    }
-}
+        return dataService.fetchPayments()
+            .then(response => response.data)
+            .then(payments => {
+                // setTimeout(() => receivePayments(payments), 2000);
+                dispatch(receivePayments(payments))
+            });
+    };
 
-export function turnOffPaymentLoader() {
-    return {
-        type: actionTypes.SWITCH_PAYMENTS_LOADER,
-        payload: false
+    function requestPayment() {
+        return {
+            type: actions.REQUEST_PAYMENTS
+        }
+    }
+
+    function receivePayments(payments) {
+        return {
+            type: actions.RECEIVE_PAYMENTS,
+            payments
+        }
+    }
+
+    function receivePaymentsError(error) {
+        return {
+            type: actions.RECEIVE_PAYMENTS_ERROR,
+            error
+        }
     }
 }
 
 export function selectPayment(paymentId) {
     return {
-        type: actionTypes.SELECT_PAYMENT,
+        type: actions.SELECT_PAYMENT,
         payload: paymentId
     };
 }
 
 export function fetchPeriods() {
     return {
-        type: actionTypes.FETCH_PERIODS,
-        payload: dataService.fetchPeriods()
+        type: actions.FETCH_PERIODS,
+        periods: dataService.fetchPeriods()
     }
 }
 
 export function selectPeriod(periodType) {
     return {
-        type: actionTypes.SELECT_PERIOD,
+        type: actions.SELECT_PERIOD,
         payload: periodType
     }
 }
 
 export function fetchInvoices(paymentId, periodType) {
-    return {
-        type: actionTypes.FETCH_INVOICES,
-        payload: dataService.fetchInvoices(paymentId, periodType)
+    return dispatch => {
+        requestInvoices();
+
+        return dataService.fetchInvoices(paymentId, periodType)
+            .then(response => response.data)
+            .then(invoices => dispatch(receiveInvoices(invoices)))
+    };
+
+    function requestInvoices() {        
+        return {
+            type: actions.REQUEST_INVOICES
+        };
+    }
+
+    function receiveInvoices(invoices) {
+        return{
+            type: actions.RECEIVE_INVOICES,
+            invoices
+        };
+    }
+
+    function receiveInvoiceError(error) {
+        return{
+            type: actions.RECEIVE_INVOICES_ERROR,
+            error
+        };
     }
 }
+

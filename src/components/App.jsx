@@ -13,23 +13,16 @@ import Invoices from './Invoices.jsx';
 class App extends Component {
     constructor(props) {
         super(props);
-
-        this.props.turnOnPaymentLoader();
-
-        // Todo: remove setTimeout
-        const timer$ = Rx.Observable.timer(1000);
-
-        timer$.subscribe(() => {
-            this.props.fetchPayments();
-            this.props.turnOffPaymentLoader();
-        });
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.payments.length === 1
             && this.props.selectedPayment != nextProps.selectedPayment
             && this.props.selectedPeriod != nextProps.selectedPeriod) {
-            nextProps.fetchInvoices(nextProps.selectedPayment, nextProps.selectedPeriod);
+        
+            const {dispatch} = nextProps;
+        
+            dispatch(actions.fetchInvoices(nextProps.selectedPayment, nextProps.selectedPeriod)) ;
         }
     }
 
@@ -39,7 +32,6 @@ class App extends Component {
                 <h1>Payments - Invoices</h1>
                 <Payments />
                 <Periods />
-                {this.renderInstruction()}
                 <Invoices />
             </div>
         );
@@ -58,10 +50,11 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        payments: state.payments,
+        isFetchingPayments: state.payments.isFetching,
+        payments: state.payments.items,
         selectedPayment: state.selectedPayment,
         selectedPeriod: state.selectedPeriod
     }
 }
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(mapStateToProps)(App);

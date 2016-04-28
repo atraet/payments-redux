@@ -31,7 +31,7 @@ class Invoices extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        invoices: state.invoices || []
+        invoices: state.invoices.items
     };
 }
 

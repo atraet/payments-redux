@@ -8,9 +8,13 @@ class Payments extends React.Component {
         super(props);
     }
 
-    render() {
+    componentDidMount() {
+        const {dispatch} = this.props;
+        dispatch(actions.fetchPayments());
+    }
 
-        if (this.props.isLoadingPayments) {
+    render() {
+        if (this.props.isFetchingPayments) {
             return <Loader />;
         }
 
@@ -26,7 +30,7 @@ class Payments extends React.Component {
                 <div className="panel-body">
                     <table className="table  table-hover">
                         <tbody>
-                            {this.props.payments.map(payment => this.renderPayment(payment))}
+                        {this.props.payments.map(payment => this.renderPayment(payment))}
                         </tbody>
                     </table>
                 </div>
@@ -57,12 +61,14 @@ class Payments extends React.Component {
     }
 
     selectPayment(payment) {
-        this.props.selectPayment(payment.id);
+        const{dispatch} = this.props;
+
+        dispatch(actions.selectPayment(payment.id));
 
         let selectedPeriod = this.props.selectedPeriod;
 
         if (selectedPeriod) {
-            this.props.fetchInvoices(payment.id, selectedPeriod);
+            dispatch(actions.fetchInvoices(payment.id, selectedPeriod));
         }
     }
 }
@@ -70,11 +76,11 @@ class Payments extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        payments: state.payments || [],
-        isLoadingPayments: state.isLoadingPayments,
+        payments: state.payments.items,
+        isFetchingPayments: state.payments.isFetching,
         selectedPayment: state.selectedPayment,
         selectedPeriod: state.selectedPeriod
     };
 }
 
-export default connect(mapStateToProps, actions)(Payments);
+export default connect(mapStateToProps)(Payments);

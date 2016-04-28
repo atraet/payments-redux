@@ -9,7 +9,7 @@ import createLogger from 'redux-logger';
 import App from './components/App.jsx';
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, Thunk, createLogger())(createStore);
+const createStoreWithMiddleware = applyMiddleware(Thunk, createLogger())(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>

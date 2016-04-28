@@ -6,16 +6,19 @@ import loadPeriod from './hoc/loadPeriod';
 class Periods extends React.Component {
     constructor(props) {
         super(props);
+    }
 
-        this.props.fetchPeriods();
+    componentDidMount(){
+        const {dispatch} = this.props;
+        dispatch(actions.fetchPeriods());
     }
 
     render() {
 
-        // Do not render when payments is loading, OR there is no payments
-        if (this.props.isLoadingPayments || !this.props.payments.length) {
-            return null;
-        }
+        // // Do not render when payments is loading, OR there is no payments
+        // if (this.props.isLoadingPayments || !this.props.payments.length) {
+        //     return null;
+        // }
 
         return (
             <div className="panel panel-info">
@@ -50,12 +53,15 @@ class Periods extends React.Component {
     }
 
     selectPeriod(period) {
-        this.props.selectPeriod(period.type);
+
+        const{dispatch} = this.props;
+
+        dispatch(actions.selectPeriod(period.type));
 
         let selectedPayment = this.props.selectedPayment;
 
         if (selectedPayment) {
-            this.props.fetchInvoices(selectedPayment, period.type);
+            dispatch(actions.fetchInvoices(selectedPayment, period.type));
         }
     }
 }
@@ -70,4 +76,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, actions)(Periods);
+export default connect(mapStateToProps)(Periods);
