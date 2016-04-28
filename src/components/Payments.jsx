@@ -15,7 +15,7 @@ class Payments extends React.Component {
 
     render() {
         if (this.props.isFetchingPayments) {
-            return <Loader />;
+            return <Loader message="Loading payments...." />;
         }
 
         if (!this.props.payments.length) {

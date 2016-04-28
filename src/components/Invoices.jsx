@@ -6,7 +6,7 @@ class Invoices extends React.Component {
     render() {
 
         if(this.props.isFetching){
-            return (<Loader />);
+            return (<Loader message="Loading invoices...." />);
         }
 
         if(!this.props.invoices.length){
@@ -21,7 +21,6 @@ class Invoices extends React.Component {
                 <div className="panel-body">
                     <ul className="list-group"> {this.props.invoices.map(this.renderInvoice)}</ul>
                 </div>
-                <div className="panel-footer"> Selected payment: {this.props.selectedPayment}</div>
             </div>
         )
     }
