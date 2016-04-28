@@ -1,8 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Loader from './Loader.jsx';
 
 class Invoices extends React.Component {
     render() {
+
+        if(this.props.isFetching){
+            return (<Loader />);
+        }
+
         if(!this.props.invoices.length){
             return null;
         }
@@ -31,6 +37,7 @@ class Invoices extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        isFetching: state.invoices.isFetching,
         invoices: state.invoices.items
     };
 }

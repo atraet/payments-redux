@@ -19,9 +19,9 @@ class App extends Component {
         if (nextProps.payments.length === 1
             && this.props.selectedPayment != nextProps.selectedPayment
             && this.props.selectedPeriod != nextProps.selectedPeriod) {
-        
+
             const {dispatch} = nextProps;
-        
+
             dispatch(actions.fetchInvoices(nextProps.selectedPayment, nextProps.selectedPeriod)) ;
         }
     }
@@ -32,6 +32,7 @@ class App extends Component {
                 <h1>Payments - Invoices</h1>
                 <Payments />
                 <Periods />
+                {this.renderInstruction()}
                 <Invoices />
             </div>
         );

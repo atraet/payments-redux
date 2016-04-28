@@ -3,13 +3,14 @@ import * as dataService from '../dataService';
 
 export function fetchPayments() {
     return dispatch => {
-        requestPayment();
+
+        dispatch(requestPayment());
 
         return dataService.fetchPayments()
-            .then(response => response.data)
+            .then(response => response.data, 1000)
             .then(payments => {
-                // setTimeout(() => receivePayments(payments), 2000);
-                dispatch(receivePayments(payments))
+                setTimeout(() => dispatch(receivePayments(payments)), 2000);
+                // dispatch(receivePayments(payments))
             });
     };
 
@@ -57,28 +58,32 @@ export function selectPeriod(periodType) {
 
 export function fetchInvoices(paymentId, periodType) {
     return dispatch => {
-        requestInvoices();
+
+        dispatch(requestInvoices());
 
         return dataService.fetchInvoices(paymentId, periodType)
             .then(response => response.data)
-            .then(invoices => dispatch(receiveInvoices(invoices)))
+            .then(invoices => {
+                setTimeout(() => dispatch(receiveInvoices(invoices)), 2000);
+                // dispatch(receiveInvoices(invoices));
+            })
     };
 
-    function requestInvoices() {        
+    function requestInvoices() {
         return {
             type: actions.REQUEST_INVOICES
         };
     }
 
     function receiveInvoices(invoices) {
-        return{
+        return {
             type: actions.RECEIVE_INVOICES,
             invoices
         };
     }
 
     function receiveInvoiceError(error) {
-        return{
+        return {
             type: actions.RECEIVE_INVOICES_ERROR,
             error
         };
