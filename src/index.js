@@ -6,8 +6,8 @@ import ReduxPromise from 'redux-promise';
 import Thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-import App from './components/App.jsx';
-import reducers from './reducers';
+import App from './payments/components/App.jsx';
+import reducers from './payments/reducers';
 
 const createStoreWithMiddleware = applyMiddleware(Thunk, createLogger())(createStore);
 
