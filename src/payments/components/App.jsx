@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Rx from 'rxjs/Rx';
 
 import * as actions from '../actions/index';
+import Header from '../../shared/Header.jsx';
 
 import Payments from './Payments.jsx';
 import Periods from './Periods.jsx';
@@ -22,18 +23,21 @@ class App extends Component {
 
             const {dispatch} = nextProps;
 
-            dispatch(actions.fetchInvoices(nextProps.selectedPayment, nextProps.selectedPeriod)) ;
+            dispatch(actions.fetchInvoices(nextProps.selectedPayment, nextProps.selectedPeriod));
         }
     }
 
     render() {
         return (
             <div>
-                <h1>Payments - Invoices</h1>
-                <Payments />
-                <Periods />
-                {this.renderInstruction()}
-                <Invoices />
+                <Header />
+                <div className="container">
+                    <h1>Payments - Invoices</h1>
+                    <Payments />
+                    <Periods />
+                    {this.renderInstruction()}
+                    <Invoices />
+                </div>
             </div>
         );
     }
