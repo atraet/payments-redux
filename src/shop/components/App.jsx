@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../shared/Header.jsx';
+import Steps from './Steps.jsx'
 
 class ShopApp extends React.Component {
     constructor(props) {
@@ -12,6 +13,8 @@ class ShopApp extends React.Component {
                 <Header />
                 <div className="container">
                     <h2>Shop</h2>
+                    <Steps />
+                    {this.props.children}
                 </div>
             </div>
         )
