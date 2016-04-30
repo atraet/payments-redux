@@ -1,11 +1,11 @@
 module.exports = {
     entry: {
-        bundle: './src/index.js',
+        payments: './src/payments/index.js',
         shop: './src/shop/index.js'
     },
     output: {
-        path: __dirname + '/dist',
-        publicPath: '/',
+        path: __dirname + '/__build__',
+        publicPath: '/__build__',
         filename: '[name].js'
     }
     ,

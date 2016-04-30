@@ -3,4 +3,6 @@ bundle.js
 npm-debug.log
 .idea/
 dist/
+__build__/
+
 

@@ -12,9 +12,7 @@ class ShopApp extends React.Component {
             <div>
                 <Header />
                 <div className="container">
-                    <h2>Shop</h2>
-                    <Steps />
-                    {this.props.children}
+                    <h2>Hello shop</h2>
                 </div>
             </div>
         )
