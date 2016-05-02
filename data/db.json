@@ -68,16 +68,20 @@
   ],
   "Csvs": [
     {
-      "id": 1
+      "id": 1,
+      "name": "CSV 1"
     },
     {
-      "id": 2
+      "id": 2,
+      "name": "CSV 2"
     },
     {
-      "id": 3
+      "id": 3,
+      "name": "CSV 3"
     },
     {
-      "id": 4
+      "id": 4,
+      "name": "CSV 4"
     }
   ]
 }
