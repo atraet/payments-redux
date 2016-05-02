@@ -10,3 +10,7 @@ export const RECEIVE_INVOICES_ERROR = 'receive-invoices-error';
 
 export const SELECT_PAYMENT = 'select-payment';
 export const SELECT_PERIOD = 'select-period';
+
+export const REQUEST_INVOICES_CSV = 'request-csv-invoices';
+export const RECEIVE_INVOICES_CSV = 'receive-csv-invoices';
+export const RECEIVE_INVOICES_CSV_ERROR = 'receive-invoices-csv-error';

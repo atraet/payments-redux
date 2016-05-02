@@ -35,3 +35,8 @@ export function fetchInvoices(paymentId, periodType) {
 
     return [];
 }
+
+export function getCsv(url){
+    // From webapid
+    return axios.get('http://localhost:3333/Csvs');
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Loader from './Loader.jsx';
+import InvoicesCsv from './InvoicesCsv.jsx';
 
 class Invoices extends React.Component {
     render() {
@@ -19,6 +20,7 @@ class Invoices extends React.Component {
                     <h3 className="panel-title">Invoices</h3>
                 </div>
                 <div className="panel-body">
+                    <InvoicesCsv />
                     <ul className="list-group"> {this.props.invoices.map(this.renderInvoice)}</ul>
                 </div>
             </div>

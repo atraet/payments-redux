@@ -9,7 +9,7 @@ export function fetchPayments() {
         return dataService.fetchPayments()
             .then(response => response.data, 1000)
             .then(payments => {
-                setTimeout(() => dispatch(receivePayments(payments)), 2000);
+                setTimeout(() => dispatch(receivePayments(payments)), 1000);
                 // dispatch(receivePayments(payments))
             });
     };
@@ -64,7 +64,7 @@ export function fetchInvoices(paymentId, periodType) {
         return dataService.fetchInvoices(paymentId, periodType)
             .then(response => response.data)
             .then(invoices => {
-                setTimeout(() => dispatch(receiveInvoices(invoices)), 2000);
+                setTimeout(() => dispatch(receiveInvoices(invoices)), 1000);
                 // dispatch(receiveInvoices(invoices));
             })
     };
@@ -90,3 +90,35 @@ export function fetchInvoices(paymentId, periodType) {
     }
 }
 
+export function fetchInvoicesCsv(url) {
+    return dispatch => {
+        dispatch(requestCsv());
+        return dataService.getCsv(url)
+            .then(response => response.data)
+            .then(
+                csvJson => {
+                    setTimeout(() => dispatch(receiveCsv(csvJson)), 1000);
+                },
+                error => receiveCsvError(error));
+    };
+
+    function requestCsv() {
+        return {
+            type: actions.REQUEST_INVOICES_CSV
+        }
+    }
+
+    function receiveCsv(csv) {
+        return {
+            type: actions.RECEIVE_INVOICES_CSV,
+            csv
+        }
+    }
+
+    function receiveCsvError(error) {
+        return {
+            type: actions.RECEIVE_INVOICES_CSV_ERROR,
+            error
+        }
+    }
+}
