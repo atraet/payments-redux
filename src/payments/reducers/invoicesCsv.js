@@ -12,7 +12,7 @@ export default function (state = {
         case RECEIVE_INVOICES_CSV:
             return Object.assign({}, state, {
                 isFetching: false,
-                csv: jsonToCsv(action.csv)
+                csv: json2csv(action.csv)
             });
         case RECEIVE_INVOICES_CSV_ERROR:
             return Object.assign({}, state, {
@@ -24,7 +24,7 @@ export default function (state = {
     }
 }
 
-function jsonToCsv(jsonArray) {
+function json2csv(jsonArray) {
     var objArray = typeof jsonArray != 'object' ? JSON.parse(jsonArray) : jsonArray;
 
     var csvString = '';
@@ -32,15 +32,15 @@ function jsonToCsv(jsonArray) {
     csvString += createHeader(objArray);
 
     for (var i = 0; i < objArray.length; i++) {
-        var line = '';
+        var row = '';
 
         for (var index in objArray[i]) {
-            line += objArray[i][index] + ',';
+            row += objArray[i][index] + ';';
         }
 
-        line.slice(0, line.Length - 1);
+        row.slice(0, row.Length - 1);
 
-        csvString += line + '\r\n';
+        csvString += row + '\r\n';
     }
 
     return csvString;
@@ -48,7 +48,7 @@ function jsonToCsv(jsonArray) {
     function createHeader(array) {
         var row = "";
         for (var index in array[0]) {
-            row += index + ',';
+            row += index + ';';
         }
         row = row.slice(0, -1);
         return row + '\r\n';
